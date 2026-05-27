@@ -1,0 +1,34 @@
+{
+  "name": "create-universal-app",
+  "version": "1.0.0",
+  "description": "An interactive CLI scaffolding tool to spin up React (bare/Vite), Next.js, Vue, Angular, or Vanilla JS projects in seconds.",
+  "type": "module",
+  "bin": {
+    "create-universal-app": "./bin/index.js"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [
+    "cli",
+    "scaffold",
+    "create",
+    "react",
+    "nextjs",
+    "vue",
+    "angular",
+    "vanilla"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "fs-extra": "^11.2.0",
+    "minimist": "^1.2.8",
+    "picocolors": "^1.0.1"
+  }
+}
