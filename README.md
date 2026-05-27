@@ -1,4 +1,4 @@
-# 🚀 create-universal-app
+# 🚀 create-js-universal-app
 
 An interactive, high-performance CLI scaffolding tool to spin up modern, pre-configured frontend projects in seconds.
 
@@ -24,7 +24,7 @@ Pick your platform, name your project, and start coding — no boilerplate heada
 Run the scaffolder anywhere using `npx` (no installation required):
 
 ```bash
-npx create-universal-app
+npx create-js-universal-app
 ```
 
 You will be guided through a simple interactive prompt:
@@ -51,12 +51,12 @@ Simulate a full `npx` run by linking the package executable to your system globa
 npm link
 
 # Run it from any folder on your machine
-create-universal-app
+create-js-universal-app
 ```
 
 *To remove the global link when you are done testing:*
 ```bash
-npm unlink -g create-universal-app
+npm unlink -g create-js-universal-app
 ```
 
 ---
@@ -64,7 +64,7 @@ npm unlink -g create-universal-app
 ## 📂 Project Structure
 
 ```text
-create-universal-app/
+create-js-universal-app/
 ├── bin/
 │   └── index.js              # Interactive CLI entrypoint
 ├── templates/
