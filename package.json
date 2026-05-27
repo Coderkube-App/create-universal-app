@@ -25,6 +25,14 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coderkube-App/create-universal-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Coderkube-App/create-universal-app/issues"
+  },
+  "homepage": "https://github.com/Coderkube-App/create-universal-app#readme",
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "fs-extra": "^11.2.0",

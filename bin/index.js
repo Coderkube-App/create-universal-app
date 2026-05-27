@@ -87,6 +87,13 @@ async function main() {
     // Copy template directory
     await fs.copy(templatePath, targetDir);
 
+    // Rename _gitignore to .gitignore to bypass npm ignoring .gitignore files on publish
+    const rawGitignorePath = path.join(targetDir, '_gitignore');
+    const targetGitignorePath = path.join(targetDir, '.gitignore');
+    if (await fs.pathExists(rawGitignorePath)) {
+      await fs.move(rawGitignorePath, targetGitignorePath);
+    }
+
     // Customize package.json with the new project name
     const pkgPath = path.join(targetDir, 'package.json');
     if (await fs.pathExists(pkgPath)) {
