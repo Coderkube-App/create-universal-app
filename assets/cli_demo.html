@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CLI Demo — create-js-universal-app</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c0c0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  }
+  .terminal {
+    background: #1a1a2e;
+    border-radius: 12px;
+    width: 880px;
+    min-height: 520px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+    border: 1px solid #2a2a4a;
+  }
+  .titlebar {
+    background: #16162a;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #2a2a4a;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+  .titlebar-text {
+    color: #888;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+  .content {
+    padding: 16px 20px;
+    color: #e2e8f0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    white-space: pre;
+    min-height: 480px;
+  }
+  .cyan { color: #22d3ee; }
+  .green { color: #4ade80; }
+  .yellow { color: #facc15; }
+  .red { color: #f87171; }
+  .bold { font-weight: 700; }
+  .dim { color: #64748b; }
+  .white { color: #f1f5f9; }
+  .blue { color: #60a5fa; }
+  .magenta { color: #c084fc; }
+  .bg-cyan { background: #22d3ee; color: #000; font-weight: 700; padding: 0 4px; }
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: #e2e8f0;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  @keyframes spin {
+    0% { content: '◒'; }
+    25% { content: '◐'; }
+    50% { content: '◓'; }
+    75% { content: '◑'; }
+  }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="titlebar">
+    <div class="dot dot-red"></div>
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-green"></div>
+    <span class="titlebar-text">Terminal — npx create-js-universal-app</span>
+  </div>
+  <div class="content" id="output"></div>
+</div>
+
+<script>
+const output = document.getElementById('output');
+
+const INTRO_BAR = `<span class="bg-cyan"> 🚀 UNIVERSAL SCAFFOLDER </span>`;
+
+const steps = [
+  // Step 0: Type the npx command
+  { type: 'typeCommand', text: 'npx create-js-universal-app', delay: 55 },
+
+  // Step 1: Show intro bar (clack-style)
+  { type: 'instant', text: '\n' + INTRO_BAR + '\n\n', delay: 600 },
+
+  // Step 2: Prompt for project name — type input
+  { type: 'typeInput', question: '◆  What is your project name?', placeholder: 'my-universal-project', answer: 'my-cool-app', delay: 900 },
+
+  // Step 3: Framework selection with arrow cycling
+  {
+    type: 'select',
+    question: '◆  Select your target framework / platform:',
+    options: [
+      { label: 'React.js (Bare / Webpack)', hint: 'Standard production bundler with Babel' },
+      { label: 'React.js (Vite)',           hint: 'Ultra-fast hot-reloading development' },
+      { label: 'Next.js',                   hint: 'React framework with SSR & App Router' },
+      { label: 'Vue.js (Vite)',             hint: 'Performant, modular framework' },
+      { label: 'Angular',                   hint: 'Enterprise-ready TypeScript framework' },
+      { label: 'Vanilla JS',               hint: 'Pure JavaScript, HTML & CSS' },
+    ],
+    selected: 1,
+    delay: 800
+  },
+
+  // Step 4: Spinner — scaffolding
+  { type: 'spinner', text: 'Scaffolding your React (Vite) app...', doneText: 'React (Vite) project created successfully!', duration: 2200 },
+
+  // Step 5: Success outro
+  { type: 'instant', text: '\n<span class="green bold">◇  ✨ Scaffolding complete! Run the following commands to get started:</span>\n', delay: 400 },
+
+  // Step 6: Next steps
+  { type: 'instant', text: '\n<span class="bold white">   cd my-cool-app</span>\n<span class="bold white">   npm install</span>\n<span class="bold white">   npm run dev</span>\n', delay: 100 },
+];
+
+let html = '';
+
+function appendHTML(newHtml) {
+  html += newHtml;
+  output.innerHTML = html;
+  output.scrollTop = output.scrollHeight;
+}
+
+function setHTML(newHtml) {
+  html = newHtml;
+  output.innerHTML = html;
+}
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+async function typeText(text, charDelay) {
+  for (const ch of text) {
+    appendHTML(ch);
+    await sleep(charDelay);
+  }
+}
+
+async function animateSelectOption(question, options, selectedIdx) {
+  const baseHTML = html;
+
+  // Cycle from option 0 through to the selected option
+  for (let current = 0; current <= selectedIdx; current++) {
+    let menuHtml = `<span class="bold white">${question}</span>\n`;
+    for (let i = 0; i < options.length; i++) {
+      if (i === current) {
+        menuHtml += `  <span class="cyan bold">● ${options[i].label}</span>  <span class="dim">${options[i].hint}</span>\n`;
+      } else {
+        menuHtml += `  <span class="dim">○ ${options[i].label}</span>\n`;
+      }
+    }
+    setHTML(baseHTML + menuHtml);
+    await sleep(400);
+  }
+
+  // Collapse to single-line selected answer
+  await sleep(250);
+  setHTML(baseHTML + `<span class="bold white">${question}</span> <span class="green">${options[selectedIdx].label}</span>\n`);
+}
+
+async function animateTypeInput(question, placeholder, answer) {
+  // Show question with placeholder
+  appendHTML(`<span class="bold white">${question}</span> <span class="dim">${placeholder}</span>`);
+  await sleep(600);
+
+  // Clear placeholder, type the answer
+  const base = html.replace(`<span class="dim">${placeholder}</span>`, '');
+  html = base;
+  output.innerHTML = html;
+
+  for (const ch of answer) {
+    appendHTML(`<span class="cyan">${ch}</span>`);
+    await sleep(80);
+  }
+  await sleep(300);
+  appendHTML('\n');
+}
+
+async function animateSpinner(text, doneText, duration) {
+  const baseHTML = html;
+  const spinnerFrames = ['◒', '◐', '◓', '◑'];
+  const interval = 100;
+  const totalFrames = Math.floor(duration / interval);
+
+  for (let i = 0; i < totalFrames; i++) {
+    const frame = spinnerFrames[i % spinnerFrames.length];
+    setHTML(baseHTML + `<span class="cyan">${frame}</span> <span class="cyan">${text}</span>`);
+    await sleep(interval);
+  }
+
+  // Done
+  setHTML(baseHTML + `<span class="green bold">✔</span> <span class="green">${doneText}</span>\n`);
+}
+
+async function run() {
+  while (true) {
+    // Reset terminal
+    html = '';
+    output.innerHTML = '';
+
+    // Show prompt indicator
+    appendHTML('<span class="green bold">❯</span> ');
+
+    for (const step of steps) {
+      switch (step.type) {
+        case 'typeCommand':
+          await typeText(step.text, step.delay);
+          await sleep(500);
+          appendHTML('\n');
+          break;
+
+        case 'instant':
+          await sleep(step.delay);
+          appendHTML(step.text);
+          break;
+
+        case 'select':
+          await animateSelectOption(step.question, step.options, step.selected);
+          await sleep(step.delay);
+          break;
+
+        case 'typeInput':
+          await animateTypeInput(step.question, step.placeholder, step.answer);
+          await sleep(step.delay);
+          break;
+
+        case 'spinner':
+          await animateSpinner(step.text, step.doneText, step.duration);
+          await sleep(400);
+          break;
+      }
+    }
+
+    // Final cursor blink — hold for 3 seconds before restarting
+    await sleep(300);
+    appendHTML('\n<span class="green bold">❯</span> <span class="cursor"></span>');
+    await sleep(3000);
+  }
+}
+
+// Start after a short delay
+setTimeout(run, 800);
+</script>
+</body>
+</html>

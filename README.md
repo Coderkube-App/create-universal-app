@@ -6,6 +6,14 @@ Pick your platform, name your project, and start coding — no boilerplate heada
 
 ---
 
+## 🎬 Demo
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Coderkube-App/create-universal-app/main/assets/cli_demo.gif" alt="CLI Demo" width="800" />
+</p>
+
+---
+
 ## ✨ Supported Platforms
 
 | Platform | Template Key | Bundler | Description |

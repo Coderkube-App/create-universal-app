@@ -1,6 +1,6 @@
 {
   "name": "create-js-universal-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An interactive CLI scaffolding tool to spin up React (bare/Vite), Next.js, Vue, Angular, or Vanilla JS projects in seconds.",
   "type": "module",
   "bin": {
