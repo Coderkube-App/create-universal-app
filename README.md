@@ -9,21 +9,21 @@ Pick your platform, name your project, and start coding — no boilerplate heada
 ## 🎬 Demo
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Coderkube-App/create-universal-app/main/assets/cli_demo.gif" alt="CLI Demo" width="800" />
+  <img src="https://raw.githubusercontent.com/Coderkube-App/create-universal-app/main/assets/cli_demo.html" alt="CLI Demo" width="800" />
 </p>
 
 ---
 
 ## ✨ Supported Platforms
 
-| Platform | Template Key | Bundler | Description |
-|---|---|---|---|
-| **React.js (Bare)** | `react-bare` | Webpack + Babel | Standard production bundler setup |
-| **React.js (Vite)** | `react-vite` | Vite | Ultra-fast HMR development |
-| **Next.js** | `nextjs` | Next.js built-in | SSR & App Router framework |
-| **Vue.js** | `vue` | Vite | Composition API with SFC support |
-| **Angular** | `angular` | Angular CLI | Enterprise-ready TypeScript framework |
-| **Vanilla JS** | `vanilla` | Vite | Pure JavaScript, HTML & CSS |
+| Platform            | Template Key | Bundler          | Description                           |
+| ------------------- | ------------ | ---------------- | ------------------------------------- |
+| **React.js (Bare)** | `react-bare` | Webpack + Babel  | Standard production bundler setup     |
+| **React.js (Vite)** | `react-vite` | Vite             | Ultra-fast HMR development            |
+| **Next.js**         | `nextjs`     | Next.js built-in | SSR & App Router framework            |
+| **Vue.js**          | `vue`        | Vite             | Composition API with SFC support      |
+| **Angular**         | `angular`    | Angular CLI      | Enterprise-ready TypeScript framework |
+| **Vanilla JS**      | `vanilla`    | Vite             | Pure JavaScript, HTML & CSS           |
 
 ---
 
@@ -36,6 +36,7 @@ npx create-js-universal-app
 ```
 
 You will be guided through a simple interactive prompt:
+
 1. **Enter your project name** (e.g., `my-cool-app`).
 2. **Select your framework/platform** from the 6 options above.
 3. The CLI copies the template, customizes `package.json`, and outputs the starting commands.
@@ -47,13 +48,17 @@ You will be guided through a simple interactive prompt:
 If you are developing this CLI locally or customizing its templates:
 
 ### 1. Direct Execution
+
 Test the script immediately from the package root:
+
 ```bash
 node ./bin/index.js
 ```
 
 ### 2. Global Link Testing
+
 Simulate a full `npx` run by linking the package executable to your system globally:
+
 ```bash
 # Link the CLI
 npm link
@@ -62,7 +67,8 @@ npm link
 create-js-universal-app
 ```
 
-*To remove the global link when you are done testing:*
+_To remove the global link when you are done testing:_
+
 ```bash
 npm unlink -g create-js-universal-app
 ```
@@ -108,10 +114,12 @@ You can easily extend the CLI to support new frameworks (e.g., Svelte, Astro, So
 To keep this scaffolding tool robust, secure, and modern, follow this recommended maintenance schedule:
 
 ### 🔄 Every 3 Months (Quarterly Checkup)
+
 - **Dependency Audit**: Run `npm audit` inside the root folder and in each template directory to patch security vulnerabilities.
 - **Minor Upgrades**: Upgrade minor versions of packages inside the template `package.json` files (e.g., updating Vite or React minor patches).
 
 ### 🚀 Every 6 Months (Major Framework Alignment)
+
 - **Major Upgrades**: Check for major releases of Next.js, Angular, React, and Vue.
 - **Template Updates**: Update the code inside the corresponding templates if any APIs are deprecated by new framework versions.
 
