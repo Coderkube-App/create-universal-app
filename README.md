@@ -9,10 +9,10 @@ Pick your platform, name your project, and start coding — no boilerplate heada
 ## 🎬 Demo
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Coderkube-App/create-universal-app/main/assets/cli_demo.gif" alt="CLI Demo" width="800" />
+  <img src="https://raw.githubusercontent.com/Coderkube-App/create-universal-app/main/assets/cli_demo.svg" alt="CLI Demo" width="880" />
 </p>
 
-> 🖥️ [**View Interactive Demo**](https://coderkube-app.github.io/create-universal-app/assets/cli_demo.html) — open the animated terminal simulation in your browser.
+> 🖥️ [**View Interactive Demo**](https://coderkube-app.github.io/create-universal-app/assets/cli_demo.html) — open the full interactive terminal simulation in your browser.
 
 ---
 

@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" width="880" height="520">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&amp;display=swap');
+
+      .terminal-bg { fill: #1a1a2e; }
+      .titlebar-bg { fill: #16162a; }
+      .border { fill: none; stroke: #2a2a4a; stroke-width: 1; }
+      .dot-red { fill: #ff5f57; }
+      .dot-yellow { fill: #febc2e; }
+      .dot-green { fill: #28c840; }
+      .titlebar-text { fill: #888; font-family: 'Fira Code', 'Consolas', monospace; font-size: 12px; }
+
+      .prompt { fill: #4ade80; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; }
+      .command { fill: #e2e8f0; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+      .cyan { fill: #22d3ee; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+      .cyan-bold { fill: #22d3ee; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; }
+      .green { fill: #4ade80; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+      .green-bold { fill: #4ade80; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; }
+      .white { fill: #f1f5f9; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; }
+      .dim { fill: #64748b; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+      .bg-cyan-text { fill: #000; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; }
+      .bg-cyan-rect { fill: #22d3ee; }
+
+      /* Cursor blink */
+      .cursor { fill: #e2e8f0; }
+      @keyframes blink { 0%,49%{opacity:1}50%,100%{opacity:0} }
+      .cursor-blink { animation: blink 1s step-end infinite; }
+
+      /* Typing reveal — clip from left */
+      @keyframes typeIn {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+
+      /* Fade in */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* Shared fade-in class */
+      .anim-fade {
+        opacity: 0;
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      /* ── Step 1: Prompt + command typing ── */
+      .step-prompt { animation-delay: 0.5s; }
+
+      .cmd-char { opacity: 0; animation: fadeIn 0.05s ease forwards; }
+      .c1  { animation-delay: 0.8s; }
+      .c2  { animation-delay: 0.86s; }
+      .c3  { animation-delay: 0.92s; }
+      .c4  { animation-delay: 0.98s; }
+      .c5  { animation-delay: 1.04s; }
+      .c6  { animation-delay: 1.1s; }
+      .c7  { animation-delay: 1.16s; }
+      .c8  { animation-delay: 1.22s; }
+      .c9  { animation-delay: 1.28s; }
+      .c10 { animation-delay: 1.34s; }
+      .c11 { animation-delay: 1.4s; }
+      .c12 { animation-delay: 1.46s; }
+      .c13 { animation-delay: 1.52s; }
+      .c14 { animation-delay: 1.58s; }
+      .c15 { animation-delay: 1.64s; }
+      .c16 { animation-delay: 1.7s; }
+      .c17 { animation-delay: 1.76s; }
+      .c18 { animation-delay: 1.82s; }
+      .c19 { animation-delay: 1.88s; }
+      .c20 { animation-delay: 1.94s; }
+      .c21 { animation-delay: 2.0s; }
+      .c22 { animation-delay: 2.06s; }
+      .c23 { animation-delay: 2.12s; }
+      .c24 { animation-delay: 2.18s; }
+      .c25 { animation-delay: 2.24s; }
+      .c26 { animation-delay: 2.3s; }
+      .c27 { animation-delay: 2.36s; }
+
+      /* ── Step 2: Intro bar ── */
+      .step-intro { animation-delay: 2.8s; }
+
+      /* ── Step 3: Project name prompt ── */
+      .step-name-q { animation-delay: 3.6s; }
+      .step-name-placeholder { opacity:0; animation: fadeIn 0.2s ease forwards 3.6s, fadeOut 0.2s ease forwards 4.4s; }
+      @keyframes fadeOut { from{opacity:1}to{opacity:0} }
+
+      /* Type "my-cool-app" */
+      .name-char { opacity: 0; animation: fadeIn 0.05s ease forwards; }
+      .n1  { animation-delay: 4.6s; }
+      .n2  { animation-delay: 4.68s; }
+      .n3  { animation-delay: 4.76s; }
+      .n4  { animation-delay: 4.84s; }
+      .n5  { animation-delay: 4.92s; }
+      .n6  { animation-delay: 5.0s; }
+      .n7  { animation-delay: 5.08s; }
+      .n8  { animation-delay: 5.16s; }
+      .n9  { animation-delay: 5.24s; }
+      .n10 { animation-delay: 5.32s; }
+      .n11 { animation-delay: 5.4s; }
+
+      /* ── Step 4: Framework selection ── */
+      .step-select-q { animation-delay: 6.2s; }
+      .step-select-opts { animation-delay: 6.5s; }
+
+      /* Highlight cycling: show opt0 first, then opt1 selected */
+      .select-phase1 { opacity:0; animation: fadeIn 0.1s ease forwards 6.5s, fadeOut 0.1s ease forwards 7.0s; }
+      .select-phase2 { opacity:0; animation: fadeIn 0.1s ease forwards 7.0s, fadeOut 0.1s ease forwards 7.8s; }
+      /* Final collapsed answer */
+      .step-select-answer { opacity:0; animation: fadeIn 0.2s ease forwards 7.8s; }
+
+      /* ── Step 5: Spinner ── */
+      .step-spinner { opacity:0; animation: fadeIn 0.1s ease forwards 8.3s, fadeOut 0.1s ease forwards 10.0s; }
+      @keyframes spinFrames {
+        0%   { opacity:1; } 25%  { opacity:0; }
+      }
+      .spin-f1 { animation: spinFrames 0.4s step-end infinite 8.3s; }
+      .spin-f2 { animation: spinFrames 0.4s step-end infinite 8.4s; }
+      .spin-f3 { animation: spinFrames 0.4s step-end infinite 8.5s; }
+      .spin-f4 { animation: spinFrames 0.4s step-end infinite 8.6s; }
+
+      .step-spinner-done { opacity:0; animation: fadeIn 0.2s ease forwards 10.0s; }
+
+      /* ── Step 6: Success + commands ── */
+      .step-success { animation-delay: 10.5s; }
+      .step-cmds { animation-delay: 11.0s; }
+
+      /* ── Step 7: Final prompt cursor ── */
+      .step-final { animation-delay: 11.5s; }
+      .final-cursor { opacity:0; animation: fadeIn 0.1s ease forwards 11.5s, blink 1s step-end infinite 11.6s; }
+    </style>
+  </defs>
+
+  <!-- Terminal window -->
+  <rect class="terminal-bg" x="0" y="0" width="880" height="520" rx="12" ry="12"/>
+  <rect class="border" x="0.5" y="0.5" width="879" height="519" rx="12" ry="12"/>
+
+  <!-- Title bar -->
+  <rect class="titlebar-bg" x="1" y="1" width="878" height="38" rx="12" ry="12"/>
+  <rect class="titlebar-bg" x="1" y="27" width="878" height="12"/>
+  <line x1="1" y1="39" x2="879" y2="39" stroke="#2a2a4a" stroke-width="1"/>
+  <circle class="dot-red" cx="20" cy="20" r="6"/>
+  <circle class="dot-yellow" cx="40" cy="20" r="6"/>
+  <circle class="dot-green" cx="60" cy="20" r="6"/>
+  <text class="titlebar-text" x="76" y="24">Terminal — npx create-js-universal-app</text>
+
+  <!-- Content area starts at y=55 -->
+  <g transform="translate(20, 65)">
+
+    <!-- Step 1: Prompt ❯ + typed command -->
+    <g class="anim-fade step-prompt">
+      <text class="prompt" x="0" y="0">❯</text>
+    </g>
+    <text class="command" x="20" y="0">
+      <tspan class="cmd-char c1">n</tspan><tspan class="cmd-char c2">p</tspan><tspan class="cmd-char c3">x</tspan><tspan class="cmd-char c4"> </tspan><tspan class="cmd-char c5">c</tspan><tspan class="cmd-char c6">r</tspan><tspan class="cmd-char c7">e</tspan><tspan class="cmd-char c8">a</tspan><tspan class="cmd-char c9">t</tspan><tspan class="cmd-char c10">e</tspan><tspan class="cmd-char c11">-</tspan><tspan class="cmd-char c12">j</tspan><tspan class="cmd-char c13">s</tspan><tspan class="cmd-char c14">-</tspan><tspan class="cmd-char c15">u</tspan><tspan class="cmd-char c16">n</tspan><tspan class="cmd-char c17">i</tspan><tspan class="cmd-char c18">v</tspan><tspan class="cmd-char c19">e</tspan><tspan class="cmd-char c20">r</tspan><tspan class="cmd-char c21">s</tspan><tspan class="cmd-char c22">a</tspan><tspan class="cmd-char c23">l</tspan><tspan class="cmd-char c24">-</tspan><tspan class="cmd-char c25">a</tspan><tspan class="cmd-char c26">p</tspan><tspan class="cmd-char c27">p</tspan>
+    </text>
+
+    <!-- Step 2: Intro bar -->
+    <g class="anim-fade step-intro">
+      <rect class="bg-cyan-rect" x="0" y="18" width="260" height="22" rx="3"/>
+      <text class="bg-cyan-text" x="8" y="34">🚀 UNIVERSAL SCAFFOLDER</text>
+    </g>
+
+    <!-- Step 3: Project name -->
+    <g class="anim-fade step-name-q">
+      <text class="white" x="0" y="64">◆  What is your project name?</text>
+    </g>
+    <!-- Placeholder (fades out) -->
+    <text class="dim step-name-placeholder" x="290" y="64">my-universal-project</text>
+    <!-- Typed answer -->
+    <text class="cyan" x="290" y="64">
+      <tspan class="name-char n1">m</tspan><tspan class="name-char n2">y</tspan><tspan class="name-char n3">-</tspan><tspan class="name-char n4">c</tspan><tspan class="name-char n5">o</tspan><tspan class="name-char n6">o</tspan><tspan class="name-char n7">l</tspan><tspan class="name-char n8">-</tspan><tspan class="name-char n9">a</tspan><tspan class="name-char n10">p</tspan><tspan class="name-char n11">p</tspan>
+    </text>
+
+    <!-- Step 4: Framework selection -->
+    <g class="anim-fade step-select-q">
+      <text class="white" x="0" y="92">◆  Select your target framework / platform:</text>
+    </g>
+
+    <!-- Phase 1: First option highlighted -->
+    <g class="select-phase1">
+      <text class="cyan-bold" x="16" y="114">● React.js (Bare / Webpack)</text>
+      <text class="dim" x="290" y="114">Standard production bundler with Babel</text>
+      <text class="dim" x="16" y="134">○ React.js (Vite)</text>
+      <text class="dim" x="16" y="154">○ Next.js</text>
+      <text class="dim" x="16" y="174">○ Vue.js (Vite)</text>
+      <text class="dim" x="16" y="194">○ Angular</text>
+      <text class="dim" x="16" y="214">○ Vanilla JS</text>
+    </g>
+
+    <!-- Phase 2: Second option (Vite) highlighted -->
+    <g class="select-phase2">
+      <text class="dim" x="16" y="114">○ React.js (Bare / Webpack)</text>
+      <text class="cyan-bold" x="16" y="134">● React.js (Vite)</text>
+      <text class="dim" x="200" y="134">Ultra-fast hot-reloading development</text>
+      <text class="dim" x="16" y="154">○ Next.js</text>
+      <text class="dim" x="16" y="174">○ Vue.js (Vite)</text>
+      <text class="dim" x="16" y="194">○ Angular</text>
+      <text class="dim" x="16" y="214">○ Vanilla JS</text>
+    </g>
+
+    <!-- Collapsed answer -->
+    <g class="step-select-answer">
+      <text class="white" x="0" y="92">◆  Select your target framework / platform:</text>
+      <text class="green" x="370" y="92">React.js (Vite)</text>
+    </g>
+
+    <!-- Step 5: Spinner -->
+    <g class="step-spinner">
+      <text class="cyan" x="0" y="120">◒</text>
+      <text class="cyan" x="18" y="120">Scaffolding your React (Vite) app...</text>
+    </g>
+    <!-- Spinner done -->
+    <g class="step-spinner-done">
+      <text class="green-bold" x="0" y="120">✔</text>
+      <text class="green" x="18" y="120">React (Vite) project created successfully!</text>
+    </g>
+
+    <!-- Step 6: Success message -->
+    <g class="anim-fade step-success">
+      <text class="green-bold" x="0" y="152">◇  ✨ Scaffolding complete! Run the following commands to get started:</text>
+    </g>
+
+    <!-- Step 7: Commands -->
+    <g class="anim-fade step-cmds">
+      <text class="white" x="24" y="182">cd my-cool-app</text>
+      <text class="white" x="24" y="202">npm install</text>
+      <text class="white" x="24" y="222">npm run dev</text>
+    </g>
+
+    <!-- Step 8: Final prompt with blinking cursor -->
+    <g class="anim-fade step-final">
+      <text class="prompt" x="0" y="252">❯</text>
+    </g>
+    <rect class="cursor final-cursor" x="20" y="239" width="8" height="16" rx="1"/>
+
+  </g>
+</svg>
